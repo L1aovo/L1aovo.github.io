@@ -272,8 +272,8 @@
       <i class="fa fa-chevron-left"></i> SQLLABS 20-33
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/07/20/SQL/" rel="next" title="SQL小结">
-      SQL小结 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/07/20/SQLILABS%201-19/" rel="next" title="SQLLABS 1-19">
+      SQLLABS 1-19 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -287,6 +287,7 @@
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -445,6 +446,26 @@
   
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '78387a75ae4ac2ce4920',
+      clientSecret: '57cd8957a1538817153b2368513850829cd3676e',
+      repo        : 'blogcomment',
+      owner       : 'yaoge1225',
+      admin       : ['yaoge1225'],
+      id          : '57be202a275f506ca4cb1d8454017c49',
+        language: 'zh-CN',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
