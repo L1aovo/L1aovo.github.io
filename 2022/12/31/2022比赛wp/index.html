@@ -27,15 +27,15 @@
 <meta property="og:site_name" content="L1aoのblog">
 <meta property="og:description" content="比赛wp">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/yaoge1225/blogpic/master/img/image-20220228141617622.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/yaoge1225/blogpic/master/img/image-20220228142026806.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/yaoge1225/blogpic/master/img/image-20220416124200245.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/L1aovo/blogpic/master/img/image-20220228141617622.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/L1aovo/blogpic/master/img/image-20220228142026806.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/L1aovo/blogpic/master/img/image-20220416124200245.png">
 <meta property="article:published_time" content="2022-12-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-27T06:09:26.265Z">
+<meta property="article:modified_time" content="2022-12-13T15:22:25.435Z">
 <meta property="article:author" content="L1ao">
 <meta property="article:tag" content="ctf">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/yaoge1225/blogpic/master/img/image-20220228141617622.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/L1aovo/blogpic/master/img/image-20220228141617622.png">
 
 <link rel="canonical" href="http://example.com/2022/12/31/2022%E6%AF%94%E8%B5%9Bwp/">
 
@@ -191,7 +191,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-06-27 14:09:26" itemprop="dateModified" datetime="2022-06-27T14:09:26+08:00">2022-06-27</time>
+                <time title="Modified: 2022-12-13 23:22:25" itemprop="dateModified" datetime="2022-12-13T23:22:25+08:00">2022-12-13</time>
               </span>
 
           
@@ -207,9 +207,9 @@
 
       
         <h2 id="SUSCTF"><a href="#SUSCTF" class="headerlink" title="SUSCTF"></a>SUSCTF</h2><h3 id="web"><a href="#web" class="headerlink" title="web"></a>web</h3><h4 id="fxxkcors"><a href="#fxxkcors" class="headerlink" title="fxxkcors"></a>fxxkcors</h4><p>登陆页面 需要normal admin 才能看到flag</p>
-<p><img src="https://raw.githubusercontent.com/yaoge1225/blogpic/master/img/image-20220228141617622.png" alt="image-20220228141617622"></p>
+<p><img src="https://raw.githubusercontent.com/L1aovo/blogpic/master/img/image-20220228141617622.png" alt="image-20220228141617622"></p>
 <p>猜测需要admin账号才能 提升普通用户为normal admin</p>
-<p><img src="https://raw.githubusercontent.com/yaoge1225/blogpic/master/img/image-20220228142026806.png" alt="image-20220228142026806"></p>
+<p><img src="https://raw.githubusercontent.com/L1aovo/blogpic/master/img/image-20220228142026806.png" alt="image-20220228142026806"></p>
 <p>根据 题目 可推 fuckcors 为 一个 跨域攻击</p>
 <p>robot核心源码  bot 先登陆 admin用户然后会访问我们提交的url </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> visit = <span class="keyword">async</span> (browser, url) =&gt;&#123;</span><br><span class="line">    <span class="keyword">let</span> site = process.env.FXXK_SITE ?? <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`[+]<span class="subst">$&#123;opt.name&#125;</span>: <span class="subst">$&#123;url&#125;</span>`</span>)</span><br><span class="line">    <span class="keyword">let</span> renderOpt = &#123;...opt&#125;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> loginpage = <span class="keyword">await</span> browser.newPage()</span><br><span class="line">        <span class="keyword">await</span> loginpage.goto(site)</span><br><span class="line">        <span class="keyword">await</span> loginpage.type(<span class="string">&quot;input[name=username]&quot;</span>, <span class="string">&quot;admin&quot;</span>)</span><br><span class="line">        <span class="keyword">await</span> loginpage.type(<span class="string">&quot;input[name=password]&quot;</span>, process.env.FXXK_ADMIN_PASS ?? <span class="string">&quot;&quot;</span>)</span><br><span class="line">        <span class="keyword">await</span> <span class="built_in">Promise</span>.all([</span><br><span class="line">            loginpage.click(<span class="string">&#x27;button[name=submit]&#x27;</span>),</span><br><span class="line">            loginpage.waitForNavigation(&#123;<span class="attr">waitUntil</span>: <span class="string">&#x27;networkidle0&#x27;</span>, <span class="attr">timeout</span>: <span class="number">2000</span>&#125;)</span><br><span class="line">        ])</span><br><span class="line">        <span class="keyword">await</span> loginpage.goto(<span class="string">&quot;about:blank&quot;</span>)</span><br><span class="line">        <span class="keyword">await</span> loginpage.close()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> page = <span class="keyword">await</span> browser.newPage()</span><br><span class="line">        <span class="keyword">await</span> page.goto(url, &#123;<span class="attr">waitUntil</span>: <span class="string">&#x27;networkidle0&#x27;</span>, <span class="attr">timeout</span>: <span class="number">2000</span>&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">await</span> delay(<span class="number">2000</span>) <span class="comment">/// waiting 2 second.</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">await</span> page.evaluate(<span class="function">() =&gt;</span>  <span class="built_in">document</span>.documentElement.outerHTML))</span><br><span class="line"></span><br><span class="line">    &#125;<span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(e)</span><br><span class="line">        renderOpt.message = <span class="string">&quot;error occurred&quot;</span></span><br><span class="line">        <span class="keyword">return</span> renderOpt</span><br><span class="line">    &#125;</span><br><span class="line">    renderOpt.message = <span class="string">&quot;admin will view your report soon&quot;</span></span><br><span class="line">    <span class="keyword">return</span> renderOpt</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -307,7 +307,7 @@
 <p>读 <strong>/etc/grafana/grafana.ini</strong> 读取grafana 的默认密码</p>
 <p><code>admin_password = 5f989714e132c9b04d4807dafeb10ade</code></p>
 <p>可以注入</p>
-<p><img src="https://raw.githubusercontent.com/yaoge1225/blogpic/master/img/image-20220416124200245.png" alt="image-20220416124200245"></p>
+<p><img src="https://raw.githubusercontent.com/L1aovo/blogpic/master/img/image-20220416124200245.png" alt="image-20220416124200245"></p>
 <p>可以执行任意sql语句</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/api/ds/query</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: 123.60.66.194:3000</span><br><span class="line"><span class="attribute">Content-Length</span>: 156</span><br><span class="line"><span class="attribute">accept</span>: application/json, text/plain, */*</span><br><span class="line"><span class="attribute">x-grafana-org-id</span>: 1</span><br><span class="line"><span class="attribute">User-Agent</span>: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36</span><br><span class="line"><span class="attribute">content-type</span>: application/json</span><br><span class="line"><span class="attribute">Origin</span>: http://123.60.66.194:3000</span><br><span class="line"><span class="attribute">Referer</span>: http://123.60.66.194:3000/explore?orgId=1&amp;left=%5B%22now-1h%22,%22now%22,%22MySQL%22,%7B%22refId%22:%22A%22,%22format%22:%22time_series%22,%22timeColumn%22:%22time%22,%22metricColumn%22:%22none%22,%22group%22:%5B%5D,%22where%22:%5B%7B%22type%22:%22macro%22,%22name%22:%22$__timeFilter%22,%22params%22:%5B%5D%7D%5D,%22select%22:%5B%5B%7B%22type%22:%22column%22,%22params%22:%5B%22value%22%5D%7D%5D%5D,%22rawQuery%22:true,%22rawSql%22:%22SELECT%201;%5Cn%22%7D%5D</span><br><span class="line"><span class="attribute">Accept-Encoding</span>: gzip, deflate</span><br><span class="line"><span class="attribute">Accept-Language</span>: zh-CN,zh;q=0.9</span><br><span class="line"><span class="attribute">Cookie</span>: grafana_session=afb5489f3febd540690500b9a60ed890</span><br><span class="line"><span class="attribute">Connection</span>: close</span><br><span class="line"></span><br><span class="line">&#123;&quot;queries&quot;:[&#123;&quot;refId&quot;:&quot;A&quot;,&quot;datasourceId&quot;:1,&quot;rawSql&quot;:&quot;select * from fffffflllllllllaaaagggggg&quot;,&quot;format&quot;:&quot;table&quot;&#125;],&quot;from&quot;:&quot;1650100891845&quot;,&quot;to&quot;:&quot;1650104491845&quot;&#125;</span><br></pre></td></tr></table></figure>
 <p>翻库找到flag </p>
@@ -612,8 +612,8 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       clientID    : '78387a75ae4ac2ce4920',
       clientSecret: '57cd8957a1538817153b2368513850829cd3676e',
       repo        : 'blogcomment',
-      owner       : 'yaoge1225',
-      admin       : ['yaoge1225'],
+      owner       : 'L1aovo',
+      admin       : ['L1aovo'],
       id          : '44d8f9af2808c36b87b3b947d00c18eb',
         language: 'zh-CN',
       distractionFreeMode: false
