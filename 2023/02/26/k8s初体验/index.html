@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/L1aovo/blogpic@main/img/module_05_scaling1.svg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/L1aovo/blogpic@main/img/module_06_rollingupdates1.svg">
 <meta property="article:published_time" content="2023-02-26T04:46:22.514Z">
-<meta property="article:modified_time" content="2023-02-26T12:58:30.865Z">
+<meta property="article:modified_time" content="2023-02-27T07:13:43.245Z">
 <meta property="article:author" content="L1ao">
 <meta property="article:tag" content="k8s">
 <meta property="article:tag" content="笔记">
@@ -189,10 +189,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2023-02-26 12:46:22 / Modified: 20:58:30" itemprop="dateCreated datePublished" datetime="2023-02-26T12:46:22+08:00">2023-02-26</time>
+              <time title="Created: 2023-02-26 12:46:22" itemprop="dateCreated datePublished" datetime="2023-02-26T12:46:22+08:00">2023-02-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-02-27 15:13:43" itemprop="dateModified" datetime="2023-02-27T15:13:43+08:00">2023-02-27</time>
+              </span>
 
           
             <div class="post-description">k8s入门</div>
@@ -312,6 +318,7 @@
 <li>kubectl rollout undo deployments/kubernetes-bootcamp - 要将部署回滚到上一个工作版本，请使用 rollout undo 命令：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get deployments</span><br><span class="line">NAME                  READY   UP-TO-DATE   AVAILABLE   AGE</span><br><span class="line">kubernetes-bootcamp   4/4     4            4           36s</span><br><span class="line">$ kubectl get pods</span><br><span class="line">NAME                                  READY   STATUS    RESTARTS   AGE</span><br><span class="line">kubernetes-bootcamp-fb5c67579-8k8n2   1/1     Running   0          26s</span><br><span class="line">kubernetes-bootcamp-fb5c67579-8mpqr   1/1     Running   0          26s</span><br><span class="line">kubernetes-bootcamp-fb5c67579-fw2wj   1/1     Running   0          26s</span><br><span class="line">kubernetes-bootcamp-fb5c67579-hnk24   1/1     Running   0          26s</span><br><span class="line">$ kubectl <span class="built_in">set</span> image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2</span><br><span class="line">deployment.apps/kubernetes-bootcamp image updated</span><br><span class="line">$ kubectl get pods</span><br><span class="line">NAME                                   READY   STATUS              RESTARTS   AGE</span><br><span class="line">kubernetes-bootcamp-7d44784b7c-9pb8f   0/1     ContainerCreating   0          1s</span><br><span class="line">kubernetes-bootcamp-7d44784b7c-fgxlb   1/1     Running             0          4s</span><br><span class="line">kubernetes-bootcamp-7d44784b7c-lfskb   1/1     Running             0          4s</span><br><span class="line">kubernetes-bootcamp-7d44784b7c-v95wl   0/1     ContainerCreating   0          1s</span><br><span class="line">kubernetes-bootcamp-fb5c67579-8k8n2    1/1     Terminating         0          42s</span><br><span class="line">kubernetes-bootcamp-fb5c67579-8mpqr    1/1     Terminating         0          42s</span><br><span class="line">kubernetes-bootcamp-fb5c67579-fw2wj    1/1     Terminating         0          42s</span><br><span class="line">kubernetes-bootcamp-fb5c67579-hnk24    1/1     Running             0          42s</span><br></pre></td></tr></table></figure>
+<h2 id="k8s配置"><a href="#k8s配置" class="headerlink" title="k8s配置"></a>k8s配置</h2><p>在 Kubernetes 中，为 docker 容器设置环境变量有几种不同的方式，比如： Dockerfile、kubernetes.yml、Kubernetes ConfigMaps、和 Kubernetes Secrets。</p>
 
     </div>
 
@@ -334,7 +341,10 @@
     <a href="/2023/02/21/pbctf%202023/" rel="prev" title="pbctf 2023">
       <i class="fa fa-chevron-left"></i> pbctf 2023
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/03/03/bigData/" rel="next" title="大数据学习">
+      大数据学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -394,7 +404,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#k8s%E5%88%9D%E4%BD%93%E9%AA%8C"><span class="nav-number">1.</span> <span class="nav-text">k8s初体验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFk8s"><span class="nav-number">1.1.</span> <span class="nav-text">什么是k8s</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81k8s"><span class="nav-number">1.2.</span> <span class="nav-text">为什么需要k8s</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k8s%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.</span> <span class="nav-text">k8s的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Minikube-%E5%88%9B%E5%BB%BA%E9%9B%86%E7%BE%A4"><span class="nav-number">1.3.1.</span> <span class="nav-text">使用 Minikube 创建集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-kubectl-%E5%88%9B%E5%BB%BA-Deployment"><span class="nav-number">1.3.2.</span> <span class="nav-text">使用 kubectl 创建 Deployment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B-pod-%E5%92%8C%E5%B7%A5%E4%BD%9C%E8%8A%82%E7%82%B9"><span class="nav-number">1.3.3.</span> <span class="nav-text">查看 pod 和工作节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Service-%E6%9A%B4%E9%9C%B2%E4%BD%A0%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">1.3.4.</span> <span class="nav-text">使用 Service 暴露你的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%A4%9A%E4%B8%AA%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.3.5.</span> <span class="nav-text">运行应用程序的多个实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%BB%9A%E5%8A%A8%E6%9B%B4%E6%96%B0"><span class="nav-number">1.3.6.</span> <span class="nav-text">执行滚动更新</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#k8s%E5%88%9D%E4%BD%93%E9%AA%8C"><span class="nav-number">1.</span> <span class="nav-text">k8s初体验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFk8s"><span class="nav-number">1.1.</span> <span class="nav-text">什么是k8s</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81k8s"><span class="nav-number">1.2.</span> <span class="nav-text">为什么需要k8s</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k8s%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.</span> <span class="nav-text">k8s的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Minikube-%E5%88%9B%E5%BB%BA%E9%9B%86%E7%BE%A4"><span class="nav-number">1.3.1.</span> <span class="nav-text">使用 Minikube 创建集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-kubectl-%E5%88%9B%E5%BB%BA-Deployment"><span class="nav-number">1.3.2.</span> <span class="nav-text">使用 kubectl 创建 Deployment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B-pod-%E5%92%8C%E5%B7%A5%E4%BD%9C%E8%8A%82%E7%82%B9"><span class="nav-number">1.3.3.</span> <span class="nav-text">查看 pod 和工作节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Service-%E6%9A%B4%E9%9C%B2%E4%BD%A0%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">1.3.4.</span> <span class="nav-text">使用 Service 暴露你的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%A4%9A%E4%B8%AA%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.3.5.</span> <span class="nav-text">运行应用程序的多个实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%BB%9A%E5%8A%A8%E6%9B%B4%E6%96%B0"><span class="nav-number">1.3.6.</span> <span class="nav-text">执行滚动更新</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k8s%E9%85%8D%E7%BD%AE"><span class="nav-number">1.4.</span> <span class="nav-text">k8s配置</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -410,12 +420,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
