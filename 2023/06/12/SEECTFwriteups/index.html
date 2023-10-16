@@ -17,12 +17,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="SEECTF web 解题记录">
+  <meta name="description" content="SEECTF web 解题记录alert(1)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SEECTF writeups - web challs">
+<meta property="og:title" content="SEECTF writeups - web challs&quot;&lt;script&gt;alert(1)&lt;&#x2F;script&gt;">
 <meta property="og:url" content="http://example.com/2023/06/12/SEECTFwriteups/index.html">
 <meta property="og:site_name" content="L1aoのblog">
-<meta property="og:description" content="SEECTF web 解题记录">
+<meta property="og:description" content="SEECTF web 解题记录alert(1)">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/L1aovo/blogpic@main/img/image-20230612185226271.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/L1aovo/blogpic@main/img/image-20230612185648634.png">
@@ -47,7 +47,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/L1aovo/blogpic@main/img/image-20230612202944776.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/L1aovo/blogpic@main/img/image-20230612203042917.png">
 <meta property="article:published_time" content="2023-06-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-06-12T12:54:26.619Z">
+<meta property="article:modified_time" content="2023-10-16T12:29:57.988Z">
 <meta property="article:author" content="L1ao">
 <meta property="article:tag" content="ctf">
 <meta name="twitter:card" content="summary">
@@ -66,7 +66,7 @@
   };
 </script>
 
-  <title>SEECTF writeups - web challs | L1aoのblog</title>
+  <title>SEECTF writeups - web challs"<script>alert(1)</script> | L1aoのblog</title>
   
 
 
@@ -190,7 +190,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          SEECTF writeups - web challs
+          SEECTF writeups - web challs"<script>alert(1)</script>
         </h1>
 
         <div class="post-meta">
@@ -199,13 +199,19 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2023-06-12 00:00:00 / Modified: 20:54:26" itemprop="dateCreated datePublished" datetime="2023-06-12T00:00:00+08:00">2023-06-12</time>
+              <time title="Created: 2023-06-12 00:00:00" itemprop="dateCreated datePublished" datetime="2023-06-12T00:00:00+08:00">2023-06-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-10-16 20:29:57" itemprop="dateModified" datetime="2023-10-16T20:29:57+08:00">2023-10-16</time>
+              </span>
 
           
-            <div class="post-description">SEECTF web 解题记录</div>
+            <div class="post-description">SEECTF web 解题记录<script>alert(1)</script></div>
 
         </div>
       </header>
@@ -276,6 +282,7 @@
 <p>但是在上传文件之前，需要我们进行登录，进行sql查询之前对query进行拼接，但是限制了传入的字符串只能包含大小写字母，数字，花括号，下划线。不能通过闭合引号来进行注入</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span>():</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        username = request.form[<span class="string">&#x27;username&#x27;</span>]</span><br><span class="line">        password = request.form[<span class="string">&#x27;password&#x27;</span>]</span><br><span class="line">        pattern = <span class="string">r&#x27;[^a-zA-Z0-9&#123;_&#125;]&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> re.search(pattern, username) <span class="keyword">or</span> re.search(pattern, password):</span><br><span class="line">            <span class="keyword">return</span> render_template(<span class="string">&#x27;login.html&#x27;</span>, error=<span class="string">&#x27;Sus input detected!&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        query = <span class="string">f&#x27;SELECT * FROM users WHERE dXNlcm5hbWVpbmJhc2U2NA = &quot;<span class="subst">&#123;username&#125;</span>&quot; AND cGFzc3dvcmRpbmJhc2U2NA = &quot;<span class="subst">&#123;password&#125;</span>&quot;;&#x27;</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">if</span> cur.execute(query).fetchone():</span><br><span class="line">                print(<span class="string">&quot;Login successful!&quot;</span>)</span><br><span class="line">                session[<span class="string">&#x27;usersess&#x27;</span>] = <span class="built_in">str</span>(uuid.uuid4())</span><br><span class="line">                session[<span class="string">&#x27;filename&#x27;</span>] = <span class="literal">None</span></span><br><span class="line">                <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;profile&#x27;</span>))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">raise</span> Exception(<span class="string">&#x27;Invalid Credentials. Please try again.&#x27;</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            error = <span class="string">&#x27;Invalid Credentials. Please try again.&#x27;</span></span><br><span class="line">            <span class="keyword">return</span> render_template(<span class="string">&#x27;login.html&#x27;</span>, error=error)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">&#x27;login.html&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p>有意思的是在 <code>sqlite3</code> 中，单引号和双引号具有不同的含义，一个指的是一个字符串，另一个指的是一个标识符，一个标识符可以是一个列名，所以它变成像列名=列名</p>
+<p><a target="_blank" rel="noopener" href="https://www.sqlite.org/lang_keywords.html">https://www.sqlite.org/lang_keywords.html</a></p>
 <p><img src="https://cdn.jsdelivr.net/gh/L1aovo/blogpic@main/img/T@$IP18LFCP7Z~T59RIQPUW.png" alt="T@$IP18LFCP7Z~T59RIQPUW"></p>
 <p>只要我们输入的账号密码和<code>users</code>的字段名对上了即可。</p>
 <p>登录成功后，上传文件，然后访问文件即可触发<code>ssti</code>执行任意命令</p>
